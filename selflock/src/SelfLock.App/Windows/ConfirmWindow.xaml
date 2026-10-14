@@ -1,0 +1,45 @@
+<Window x:Class="SelfLock.Windows.ConfirmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SelfLock" Width="480" SizeToContent="Height"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" ResizeMode="NoResize"
+        ShowInTaskbar="False" Topmost="True"
+        FontFamily="{StaticResource UiFont}" Foreground="{StaticResource Text}">
+    <Border Margin="20" CornerRadius="18" Background="{StaticResource Bg1}" BorderBrush="{StaticResource Stroke}" BorderThickness="1"
+            Effect="{StaticResource SoftShadow}" MouseLeftButtonDown="Drag">
+        <StackPanel Margin="26,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Width="46" Height="46" CornerRadius="14" Background="{StaticResource AmberSoft}" VerticalAlignment="Top">
+                    <TextBlock Style="{StaticResource Icon}" Text="&#xEA18;" FontSize="22" Foreground="{StaticResource Amber}"/>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="16,0,0,0">
+                    <TextBlock x:Name="TitleText" Style="{StaticResource H2}" FontSize="18" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="BodyText" Style="{StaticResource Sub}" FontSize="13.5" Margin="0,6,0,0" LineHeight="20"/>
+                </StackPanel>
+            </Grid>
+
+            <Border x:Name="DelayBox" Style="{StaticResource InnerBorder}" Margin="0,20,0,0">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource Sub}">
+                        <Run Text="Защита от импульсивных решений: подтвердить можно через "/><Run x:Name="SecondsRun" Foreground="{StaticResource Text}" FontWeight="SemiBold"/><Run Text=". Подумайте, точно ли это нужно сейчас."/>
+                    </TextBlock>
+                    <ProgressBar x:Name="DelayBar" Style="{StaticResource Bar}" Margin="0,10,0,0" Foreground="{StaticResource Amber}"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Margin="0,22,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="CancelButton" Style="{StaticResource BtnPrimary}" Content="Оставить как есть" Click="Cancel" IsCancel="True"/>
+                <Button x:Name="OkButton" Grid.Column="2" Style="{StaticResource BtnGhost}" Click="Ok"/>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>SelfLock</AssemblyName>
+    <RootNamespace>SelfLock</RootNamespace>
+    <ApplicationIcon>Assets\selflock.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>1.0.0</Version>
+    <Product>SelfLock</Product>
+    <Description>SelfLock — больше контроля, больше времени на главное</Description>
+    <Company>Команда SelfLock, ПензГТУ</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SelfLock.Core\SelfLock.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\selflock.ico" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,87 @@
+<UserControl x:Class="SelfLock.UI.MountainScene"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             IsHitTestVisible="False" ClipToBounds="True">
+    <!-- Ночные горы из макета: небо, звёзды, луна, три слоя хребтов и ельник. Чистый вектор. -->
+    <Viewbox Stretch="UniformToFill" VerticalAlignment="Bottom">
+        <Canvas Width="400" Height="300">
+            <Rectangle Width="400" Height="300">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#0E1230" Offset="0"/>
+                        <GradientStop Color="#2A1E62" Offset="0.55"/>
+                        <GradientStop Color="#5A3A9E" Offset="0.85"/>
+                        <GradientStop Color="#2A2160" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Ellipse Canvas.Left="250" Canvas.Top="20" Width="120" Height="120">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#55B9A8FF" Offset="0"/>
+                        <GradientStop Color="#00B9A8FF" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Canvas.Left="296" Canvas.Top="66" Width="28" Height="28" Fill="#E8E2FF"/>
+            <Ellipse Canvas.Left="303" Canvas.Top="63" Width="28" Height="28" Fill="#2A1E62" Opacity="0.85"/>
+
+            <Ellipse Canvas.Left="40" Canvas.Top="30" Width="2.4" Height="2.4" Fill="White" Opacity="0.8"/>
+            <Ellipse Canvas.Left="90" Canvas.Top="62" Width="1.6" Height="1.6" Fill="White" Opacity="0.6"/>
+            <Ellipse Canvas.Left="140" Canvas.Top="22" Width="2" Height="2" Fill="White" Opacity="0.7"/>
+            <Ellipse Canvas.Left="186" Canvas.Top="70" Width="1.4" Height="1.4" Fill="White" Opacity="0.5"/>
+            <Ellipse Canvas.Left="220" Canvas.Top="36" Width="2.2" Height="2.2" Fill="White" Opacity="0.8"/>
+            <Ellipse Canvas.Left="20" Canvas.Top="96" Width="1.6" Height="1.6" Fill="White" Opacity="0.5"/>
+            <Ellipse Canvas.Left="370" Canvas.Top="120" Width="1.8" Height="1.8" Fill="White" Opacity="0.6"/>
+            <Ellipse Canvas.Left="250" Canvas.Top="110" Width="1.4" Height="1.4" Fill="White" Opacity="0.5"/>
+            <Ellipse Canvas.Left="66" Canvas.Top="128" Width="1.2" Height="1.2" Fill="White" Opacity="0.4"/>
+            <Ellipse Canvas.Left="356" Canvas.Top="18" Width="1.6" Height="1.6" Fill="White" Opacity="0.6"/>
+
+            <!-- дальний хребет -->
+            <Polygon Points="0,200 40,170 80,182 130,140 170,168 205,120 250,165 290,150 340,175 400,150 400,300 0,300">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#5B49B8" Offset="0"/>
+                        <GradientStop Color="#2B2470" Offset="1"/>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+
+            <!-- главная вершина со снежной шапкой -->
+            <Polygon Points="70,300 200,95 330,300">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#7A62E0" Offset="0"/>
+                        <GradientStop Color="#3A2E8F" Offset="0.5"/>
+                        <GradientStop Color="#231C5C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+            <Polygon Points="200,95 228,140 214,134 204,148 192,132 176,138" Fill="#D9D2FF" Opacity="0.9"/>
+            <Polygon Points="200,95 330,300 200,300" Fill="#000000" Opacity="0.22"/>
+
+            <!-- ближний хребет -->
+            <Polygon Points="0,240 50,212 100,232 150,205 210,238 260,214 320,236 370,218 400,228 400,300 0,300">
+                <Polygon.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#2A2268" Offset="0"/>
+                        <GradientStop Color="#161340" Offset="1"/>
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+
+            <!-- ели -->
+            <Path Fill="#0C0D26" Data="M0,300 L0,262 L8,240 L16,262 L14,262 L22,232 L30,262 L28,262 L36,246 L44,268 L52,236 L60,268 L68,250 L76,272 L84,254 L92,276 L100,260 L108,280
+                  L300,282 L308,258 L316,276 L324,248 L332,272 L340,236 L348,266 L356,244 L364,268 L372,230 L380,260 L388,242 L396,262 L400,250 L400,300 Z"/>
+            <Rectangle Canvas.Top="276" Width="400" Height="24">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#000C0D26" Offset="0"/>
+                        <GradientStop Color="#FF0C0D26" Offset="1"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+    </Viewbox>
+</UserControl>
