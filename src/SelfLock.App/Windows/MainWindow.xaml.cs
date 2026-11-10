@@ -359,10 +359,10 @@ public partial class MainWindow
     private void AddRule(object sender, RoutedEventArgs e) => RuleEditorWindow.Open(_host, this, null, null);
 
     private void QuickShorts(object sender, RoutedEventArgs e) =>
-        _host.AddRule(new Rule { Name = "YouTube Shorts", Kind = TargetKind.Site, Target = "youtube.com/shorts", LimitMinutes = 15, Mode = ReactionMode.Hard, BlockMinutes = 60 });
+        _host.AddRule(new Rule { Name = "YouTube Shorts", Kind = TargetKind.Site, Target = "youtube.com/shorts", LimitMinutes = 15, Mode = ReactionMode.Hard, BlockMinutes = 60 }, this);
 
     private void QuickYouTube(object sender, RoutedEventArgs e) =>
-        _host.AddRule(new Rule { Name = "YouTube", Kind = TargetKind.Site, Target = "youtube.com", LimitMinutes = 30, SnoozeMinutes = 5, BlockMinutes = 30 });
+        _host.AddRule(new Rule { Name = "YouTube", Kind = TargetKind.Site, Target = "youtube.com", LimitMinutes = 30, SnoozeMinutes = 5, BlockMinutes = 30 }, this);
 
     private void OpenRules(object sender, RoutedEventArgs e) => Navigate("rules");
     private void OpenStats(object sender, RoutedEventArgs e) => Navigate("stats");

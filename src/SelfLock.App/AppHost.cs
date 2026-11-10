@@ -243,12 +243,19 @@ public sealed class AppHost
         return ConfirmWindow.Ask(owner ?? _main, title, text, delay, action);
     }
 
-    public void AddRule(Rule rule)
+    public bool AddRule(Rule rule, Window? owner = null)
     {
-        Store.Rules.Add(rule);
+        if (!Store.TryAddRule(rule, out var existing))
+        {
+            MessageWindow.Show(owner ?? _main, "Такое правило уже есть",
+                $"Правило «{existing!.Name}» уже ограничивает этот ресурс с теми же параметрами условия.");
+            return false;
+        }
+
         Engine.ResetState(rule);
         Store.SaveRules();
         Changed?.Invoke();
+        return true;
     }
 
     public bool UpdateRule(Window? owner, Rule original, Rule edited)

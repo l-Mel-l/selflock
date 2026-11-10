@@ -301,8 +301,7 @@ public partial class RuleEditorWindow
 
         if (_original is null)
         {
-            _host.AddRule(r);
-            DialogResult = true;
+            if (_host.AddRule(r, this)) DialogResult = true;
         }
         else if (_host.UpdateRule(this, _original, r))
         {
