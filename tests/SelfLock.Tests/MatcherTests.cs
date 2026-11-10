@@ -12,6 +12,13 @@ public class MatcherTests
     [InlineData("youtube.com", "notyoutube.com", false)]
     [InlineData("youtube.com/shorts", "https://www.youtube.com/shorts/abc", true)]
     [InlineData("youtube.com/shorts", "https://www.youtube.com/watch?v=1", false)]
+    [InlineData("youtube.com/shorts", "https://youtube.com/shorts", true)]
+    [InlineData("youtube.com/shorts", "https://youtube.com/shorts/", true)]
+    [InlineData("youtube.com/shorts", "https://youtube.com/shorts?feature=share", true)]
+    [InlineData("youtube.com/shorts", "https://youtube.com/shorts#top", true)]
+    [InlineData("youtube.com/shorts", "https://youtube.com/shorts-are-fun", false)]
+    [InlineData("vk.com/clips", "vk.com/clips-are-fun", false)]
+    [InlineData("youtube.com/watch?v=1", "youtube.com/watch?v=1&t=10", true)]
     [InlineData("https://VK.com/", "vk.com/feed", true)]
     [InlineData("tiktok.com", "m.tiktok.com/@user", true)]
     public void Url_matching(string pattern, string url, bool expected) =>
