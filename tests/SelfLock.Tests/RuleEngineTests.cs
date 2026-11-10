@@ -66,6 +66,22 @@ public class RuleEngineTests : IDisposable
         var e = Assert.Single(events.OfType<EnforceEvent>(), x => x.Fresh);
         Assert.Equal(rule, e.Rule);
         Assert.Equal(RulePhase.Blocked, _engine.StateOf(rule).Phase);
+        Assert.Contains(_store.Usage.Triggers, t => t.Action == "closed");
+        Assert.DoesNotContain(_store.Usage.Triggers, t => t.Action == "expired");
+    }
+
+    [Fact]
+    public void Warning_expiry_without_active_resource_is_logged_as_expired()
+    {
+        var rule = Add(new Rule { Kind = TargetKind.Site, Target = "youtube.com", LimitMinutes = 1 });
+        Run(60, YouTube);
+
+        var events = Run(30, Work);
+
+        Assert.Contains(events, e => e is EnforceEvent { Fresh: true, Active: false });
+        Assert.Equal(RulePhase.Blocked, _engine.StateOf(rule).Phase);
+        Assert.Contains(_store.Usage.Triggers, t => t.Action == "expired");
+        Assert.DoesNotContain(_store.Usage.Triggers, t => t.Action == "closed");
     }
 
     [Fact]

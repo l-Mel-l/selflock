@@ -84,7 +84,7 @@ public sealed class RuleEngine
         if (st.Phase is RulePhase.Warning or RulePhase.Snoozed && st.Until <= now)
         {
             Block(rule, st, now);
-            Record(rule, now, "closed");
+            Record(rule, now, active ? "closed" : "expired");
             events.Add(new EnforceEvent(rule, Fresh: true, Active: active));
             return;
         }
