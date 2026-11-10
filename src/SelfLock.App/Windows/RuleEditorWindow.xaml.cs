@@ -284,7 +284,7 @@ public partial class RuleEditorWindow
         }
         if (r.Condition == ConditionKind.TimeWindow && r.WindowStartMinutes == r.WindowEndMinutes)
             return "Начало и конец запрещённого времени совпадают.";
-        var dup = _host.Store.Rules.FirstOrDefault(x => x.Id != r.Id && x.Kind == r.Kind && x.Target == r.Target && x.Condition == r.Condition);
+        var dup = RuleDuplicates.Find(_host.Store.Rules, r);
         if (dup is not null) return $"Такое правило уже есть: «{dup.Name}».";
         return null;
     }
