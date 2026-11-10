@@ -477,13 +477,19 @@ public partial class MainWindow
             var cell = new Grid { ToolTip = $"{dates[i]:dd.MM, ddd}: всего {Format.Duration(totals[i])}, в ограничиваемых {Format.Duration(limited[i])}", Background = Brushes.Transparent };
             var totalBar = new Border
             {
-                Width = barWidth, Height = Math.Max(2, totals[i] / top * h), VerticalAlignment = VerticalAlignment.Bottom,
-                CornerRadius = new CornerRadius(6, 6, 2, 2), Background = Visuals.Hex("#2B3260"),
+                Width = barWidth,
+                Height = Math.Max(2, totals[i] / top * h),
+                VerticalAlignment = VerticalAlignment.Bottom,
+                CornerRadius = new CornerRadius(6, 6, 2, 2),
+                Background = Visuals.Hex("#2B3260"),
             };
             var limBar = new Border
             {
-                Width = barWidth, Height = limited[i] / top * h, VerticalAlignment = VerticalAlignment.Bottom,
-                CornerRadius = new CornerRadius(6, 6, 2, 2), Background = accent,
+                Width = barWidth,
+                Height = limited[i] / top * h,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                CornerRadius = new CornerRadius(6, 6, 2, 2),
+                Background = accent,
             };
             if (dates[i] == DateTime.Today)
             {
@@ -501,8 +507,10 @@ public partial class MainWindow
                 var lbl = new TextBlock
                 {
                     Text = dates.Count <= 10 ? dates[i].ToString("ddd dd.MM", Ru.Culture) : dates[i].ToString("dd.MM"),
-                    FontSize = 11, Foreground = dates[i] == DateTime.Today ? (Brush)FindResource("Text") : (Brush)FindResource("Dim"),
-                    HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 8, 0, 0),
+                    FontSize = 11,
+                    Foreground = dates[i] == DateTime.Today ? (Brush)FindResource("Text") : (Brush)FindResource("Dim"),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Margin = new Thickness(0, 8, 0, 0),
                 };
                 Grid.SetColumn(lbl, i + 1);
                 Grid.SetRow(lbl, 1);

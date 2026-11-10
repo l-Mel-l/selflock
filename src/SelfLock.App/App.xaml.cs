@@ -34,7 +34,8 @@ public partial class App
         {
             while (_showSignal.WaitOne())
                 Dispatcher.BeginInvoke(() => AppHost.Current?.ShowMain());
-        }) { IsBackground = true }.Start();
+        })
+        { IsBackground = true }.Start();
 
         DispatcherUnhandledException += (_, ex) =>
         {
