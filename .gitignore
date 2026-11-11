@@ -1,6 +1,7 @@
 bin/
 obj/
 publish-tmp/
+publish/
 .vs/
 *.user
 TestResults/
