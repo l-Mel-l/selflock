@@ -687,6 +687,11 @@ public partial class MainWindow
                 ToastWindow.Show("SelfLock работает в фоне", "Окно спрятано в трей возле часов. Ограничения продолжают действовать.", "");
             }
         }
-        else _host.RequestExit();
+        else
+        {
+            // Нельзя показывать окно подтверждения прямо из Closing: WPF уже помечает окно закрытым.
+            // Откладываем выход на следующий цикл диспетчера, когда Closing завершится.
+            Dispatcher.BeginInvoke(new Action(_host.RequestExit));
+        }
     }
 }
