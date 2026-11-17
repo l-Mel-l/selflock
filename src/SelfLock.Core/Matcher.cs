@@ -51,7 +51,20 @@ public static class Matcher
         // youtube.com покрывает music.youtube.com, но не notyoutube.com
         var hostOk = uh == ph || uh.EndsWith("." + ph, StringComparison.Ordinal);
         if (!hostOk) return false;
-        return pp.Length == 0 || up.StartsWith(pp, StringComparison.Ordinal);
+        if (pp.Length == 0) return true;
+
+        // Путь сравнивается по границе сегмента: /shorts не должен совпадать с /shorts-are-fun.
+        if (up == pp
+            || up.StartsWith(pp + "/", StringComparison.Ordinal)
+            || up.StartsWith(pp + "?", StringComparison.Ordinal)
+            || up.StartsWith(pp + "#", StringComparison.Ordinal))
+            return true;
+
+        // Если в шаблоне уже есть query/fragment, разрешаем дополнительные параметры.
+        return (pp.Contains('?') || pp.Contains('#'))
+               && up.StartsWith(pp, StringComparison.Ordinal)
+               && up.Length > pp.Length
+               && up[pp.Length] == '&';
     }
 
     /// <summary>Слово, по которому сайт узнаётся в заголовке окна, если адрес прочитать не удалось.</summary>

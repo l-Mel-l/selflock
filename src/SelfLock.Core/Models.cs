@@ -119,6 +119,6 @@ public sealed class TriggerRecord
     public DateTime At { get; set; }
     public string RuleId { get; set; } = "";
     public string RuleName { get; set; } = "";
-    /// <summary>warning | snooze | closed | hard</summary>
+    /// <summary>warning | snooze | closed | hard | expired</summary>
     public string Action { get; set; } = "";
 }

@@ -359,10 +359,10 @@ public partial class MainWindow
     private void AddRule(object sender, RoutedEventArgs e) => RuleEditorWindow.Open(_host, this, null, null);
 
     private void QuickShorts(object sender, RoutedEventArgs e) =>
-        _host.AddRule(new Rule { Name = "YouTube Shorts", Kind = TargetKind.Site, Target = "youtube.com/shorts", LimitMinutes = 15, Mode = ReactionMode.Hard, BlockMinutes = 60 });
+        _host.AddRule(new Rule { Name = "YouTube Shorts", Kind = TargetKind.Site, Target = "youtube.com/shorts", LimitMinutes = 15, Mode = ReactionMode.Hard, BlockMinutes = 60 }, this);
 
     private void QuickYouTube(object sender, RoutedEventArgs e) =>
-        _host.AddRule(new Rule { Name = "YouTube", Kind = TargetKind.Site, Target = "youtube.com", LimitMinutes = 30, SnoozeMinutes = 5, BlockMinutes = 30 });
+        _host.AddRule(new Rule { Name = "YouTube", Kind = TargetKind.Site, Target = "youtube.com", LimitMinutes = 30, SnoozeMinutes = 5, BlockMinutes = 30 }, this);
 
     private void OpenRules(object sender, RoutedEventArgs e) => Navigate("rules");
     private void OpenStats(object sender, RoutedEventArgs e) => Navigate("stats");
@@ -477,13 +477,19 @@ public partial class MainWindow
             var cell = new Grid { ToolTip = $"{dates[i]:dd.MM, ddd}: всего {Format.Duration(totals[i])}, в ограничиваемых {Format.Duration(limited[i])}", Background = Brushes.Transparent };
             var totalBar = new Border
             {
-                Width = barWidth, Height = Math.Max(2, totals[i] / top * h), VerticalAlignment = VerticalAlignment.Bottom,
-                CornerRadius = new CornerRadius(6, 6, 2, 2), Background = Visuals.Hex("#2B3260"),
+                Width = barWidth,
+                Height = Math.Max(2, totals[i] / top * h),
+                VerticalAlignment = VerticalAlignment.Bottom,
+                CornerRadius = new CornerRadius(6, 6, 2, 2),
+                Background = Visuals.Hex("#2B3260"),
             };
             var limBar = new Border
             {
-                Width = barWidth, Height = limited[i] / top * h, VerticalAlignment = VerticalAlignment.Bottom,
-                CornerRadius = new CornerRadius(6, 6, 2, 2), Background = accent,
+                Width = barWidth,
+                Height = limited[i] / top * h,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                CornerRadius = new CornerRadius(6, 6, 2, 2),
+                Background = accent,
             };
             if (dates[i] == DateTime.Today)
             {
@@ -501,8 +507,10 @@ public partial class MainWindow
                 var lbl = new TextBlock
                 {
                     Text = dates.Count <= 10 ? dates[i].ToString("ddd dd.MM", Ru.Culture) : dates[i].ToString("dd.MM"),
-                    FontSize = 11, Foreground = dates[i] == DateTime.Today ? (Brush)FindResource("Text") : (Brush)FindResource("Dim"),
-                    HorizontalAlignment = HorizontalAlignment.Center, Margin = new Thickness(0, 8, 0, 0),
+                    FontSize = 11,
+                    Foreground = dates[i] == DateTime.Today ? (Brush)FindResource("Text") : (Brush)FindResource("Dim"),
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Margin = new Thickness(0, 8, 0, 0),
                 };
                 Grid.SetColumn(lbl, i + 1);
                 Grid.SetRow(lbl, 1);
@@ -679,6 +687,11 @@ public partial class MainWindow
                 ToastWindow.Show("SelfLock работает в фоне", "Окно спрятано в трей возле часов. Ограничения продолжают действовать.", "");
             }
         }
-        else _host.RequestExit();
+        else
+        {
+            // Нельзя показывать окно подтверждения прямо из Closing: WPF уже помечает окно закрытым.
+            // Откладываем выход на следующий цикл диспетчера, когда Closing завершится.
+            Dispatcher.BeginInvoke(new Action(_host.RequestExit));
+        }
     }
 }

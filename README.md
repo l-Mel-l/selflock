@@ -54,7 +54,7 @@
 
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/ваш-логин/ваш-репозиторий.git
+git clone https://github.com/l-Mel-l/selflock.git
 
 # Запуск приложения
 dotnet run --project src/SelfLock.App

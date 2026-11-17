@@ -82,6 +82,19 @@ public sealed class Store
 
     public void SaveRules() => Write("rules.json", Rules);
     public void SaveSettings() => Write("settings.json", Settings);
+
+    /// <summary>
+    /// Добавляет правило, если для того же ресурса с теми же параметрами условия
+    /// ещё нет дубликата. Возвращает false и существующее правило при повторе.
+    /// </summary>
+    public bool TryAddRule(Rule rule, out Rule? existing)
+    {
+        existing = RuleDuplicates.Find(Rules, rule);
+        if (existing is not null) return false;
+        Rules.Add(rule);
+        return true;
+    }
+
     public void SaveRuntime()
     {
         Write("state.json", States);
